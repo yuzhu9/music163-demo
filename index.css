@@ -252,12 +252,14 @@ section.contents::before {
 }
 .art .download {
     border: 1px solid #d43c33;
-    display: inline-block;
+    display: block;
     font-size: 16px;
     color: #d43c33;
-    border-radius: 30px;
-    padding: 8px 66px;
+    border-radius: 38px;
+    line-height: 38px;
     margin-top: 10px;
+    margin-left: 37px;
+    margin-right: 37px;
 }
 .art .copyright {
     font-size: 12px;
