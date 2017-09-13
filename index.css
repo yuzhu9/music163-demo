@@ -250,6 +250,11 @@ section.contents::before {
 .art .bottomLogin {
     padding-top: 17%;
 }
+@media screen and (max-width: 374px){
+    .art .bottomLogin {
+        padding-top: 12%;
+    }
+}
 .art .download {
     border: 1px solid #d43c33;
     display: block;
@@ -257,13 +262,12 @@ section.contents::before {
     color: #d43c33;
     border-radius: 38px;
     line-height: 38px;
-    margin-top: 10px;
-    margin-left: 37px;
-    margin-right: 37px;
+    margin: 10px 37px 5px;
+
 }
 .art .copyright {
     font-size: 12px;
     color: #888888;
-    margin-top: 5px;
+
     transform: scale(0.75);
 }
