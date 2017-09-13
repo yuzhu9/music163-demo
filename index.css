@@ -1,0 +1,267 @@
+.top {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+/*topbar*/
+section.topbar {
+    background: #d43c33;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 17px 10px;
+}
+
+section.topbar .logo svg {
+    width: 142px;
+    vertical-align: top;
+    height: 25px;
+
+}
+
+section.topbar > a {
+    color: #ffffff;
+    font-size: 15px;
+    display: inline-block;
+    padding: 4px 10px 5px;
+    position: relative;
+}
+
+section.topbar > a::after {
+    content: "";
+    display: block;
+    border: 1px solid #ffffff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 40%/100%;
+    transform-origin: 0 0;
+}
+
+/*根据不同的设备像素比，设置不同的边框缩放比例*/
+@media (-webkit-min-device-pixel-ratio: 2) {
+    section.topbar > a::after {
+        width: 200%;
+        height: 200%;
+        transform: scale(0.5);
+    }
+}
+
+@media (-webkit-min-device-pixel-ratio: 3) {
+    section.topbar > a::after {
+        width: 300%;
+        height: 300%;
+        transform: scale(0.333333);
+    }
+}
+
+/*globalTabs*/
+section.globalTabs {
+    border-bottom: 1px solid #dddddd;
+    background: #ffffff;
+}
+
+section.globalTabs .tabs {
+    display: flex;
+}
+
+section.globalTabs .tabs > li {
+    width: 33.333333%;
+    text-align: center;
+    font-size: 15px;
+}
+
+.tabs > li .tabName {
+    padding: 13px 5px 10px;
+    display: inline-block;
+    line-height: 1;
+}
+
+.tabs > li.active .tabName {
+    color: #d43c33;
+    border-bottom: 2px solid #d43c33;
+    vertical-align: top;
+}
+
+/*contents*/
+section.contents {
+    margin-top: 104px;
+}
+
+section.contents::before {
+    content: "";
+    display: table;
+}
+
+.recommendMusic .recommendLists > h2,
+.recommendMusic .latestMusic > h2 {
+    font-size: 17px;
+    border-left: 2px solid #d43c33;
+    line-height: 1;
+    padding-left: 6px;
+    margin-top: 23px;
+    margin-bottom: 15px;
+
+}
+
+.recommendMusic .recommendLists > ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.recommendLists ul li {
+    width: 32.8%;
+    font-size: 13px;
+
+}
+
+.recommendLists li .listsCover {
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
+
+}
+
+.recommendLists .listsCover img {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.recommendLists .listsCover span {
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    color: #ffffff;
+}
+
+.recommendLists > ul p {
+    padding: 6px 5px 13px 6px;
+    line-height: 1.2;
+}
+
+/*lastestMusic*/
+.recommendMusic .latestMusic {
+    font-size: 17px;
+}
+
+.recommendMusic .latestMusic > h2 {
+
+    border-left: 2px solid #d43c33;
+    line-height: 1;
+    padding-left: 6px;
+    margin-top: 31px;
+    margin-bottom: 15px;
+}
+.latestMusic>ol>li {
+    border-bottom: 1px solid #efefef;
+}
+.latestMusic a {
+    padding-left: 10px;
+    display: flex;
+}
+
+.latestMusic .songNameContainer {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.latestMusic .songName {
+    /*这样设置是为了让宽度根据屏幕大小自适应*/
+    flex-grow: 1;
+    width: 0;
+}
+
+.latestMusic .songName p,
+.latestMusic .songName small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.latestMusic .songName span {
+    color: #888;
+}
+.latestMusic .songName small {
+    display: block;
+    color: #888;
+    font-size: 12px;
+}
+
+.latestMusic .playIcon {
+    padding: 0 10px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+}
+.latestMusic .titleIcon {
+    display: inline-block;
+    background-size: 166px 97px;
+    background-image: url(http://opdzp4hj6.bkt.clouddn.com/index_icon_2x.png);
+}
+.latestMusic .playIcon > i {
+    width: 22px;
+    height: 22px;
+    background-position: -24px 0;
+}
+
+@media (-webkit-min-device-pixel-ratio: 3) {
+    .lastestMusic .icon  {
+        background-image: url(http://opdzp4hj6.bkt.clouddn.com/image/demo/index_icon_3x.png);
+    }
+}
+.latestMusic small> i{
+    background-position: 0 0;
+    width: 12px;
+    height: 8px;
+    margin-right: 4px;
+}
+/*art*/
+.artContainer {
+    background-image: url("http://opdzp4hj6.bkt.clouddn.com/image/demo/recommand_bg_2x.png");
+    background-size: contain;
+    padding-top: 53.333333%; /*根据背景图片高度与宽度的比53.333333%将padding-top设置为这个比例，这个盒子的高度由padding-top撑开，自适应为屏幕宽度的53.333333%*/
+    position: relative;
+}
+@media (-webkit-min-device-pixel-ratio: 3){
+    .art {
+        background-image: url("http://opdzp4hj6.bkt.clouddn.com/image/demo/recommand_bg_3x.png");
+    }
+}
+.art .bottomLogin>svg {
+    width: 230px;
+    height: 44px;
+}
+.art {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    top: 0;
+    bottom: 0;
+}
+.art .bottomLogin {
+    padding-top: 17%;
+}
+.art .download {
+    border: 1px solid #d43c33;
+    display: inline-block;
+    font-size: 16px;
+    color: #d43c33;
+    border-radius: 30px;
+    padding: 8px 66px;
+    margin-top: 10px;
+}
+.art .copyright {
+    font-size: 12px;
+    color: #888888;
+    margin-top: 5px;
+    transform: scale(0.75);
+}
