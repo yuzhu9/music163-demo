@@ -47,21 +47,21 @@
     </section>
     <section class="globalTabs">
         <ul class="tabs">
-            <li class="active">
-                <div class="tabName">推荐音乐</div>
+            <li class="tabName active">
+                <div>推荐音乐</div>
             </li>
-            <li>
-                <div class="tabName">热歌榜</div>
+            <li class="tabName">
+                <div>热歌榜</div>
             </li>
-            <li>
-                <div class="tabName">搜索</div>
+            <li class="tabName">
+                <div>搜索</div>
             </li>
         </ul>
     </section>
 </div>
 <section class="contents">
     <ul>
-        <li class="recommendMusic">
+        <li class="recommendMusic active">
             <div class="recommendLists">
                 <h2>推荐歌单</h2>
                 <ul>
@@ -126,123 +126,8 @@
             </div>
             <div class="latestMusic">
                 <h2>最新音乐</h2>
-                <ol>
-                    <li>
-                        <a href="#">
-                            <div class="songNameContainer">
-                                <div class="songName">
-                                    <p>一厢情愿的不舍<span>(电视剧《那年花开月正圆》插曲)</span></p>
-                                    <small><i class="titleIcon"></i>张磊 - 那年花开月正圆 电视原声带</small>
-                                </div>
-                                <div class="playIcon"><i class="titleIcon"></i></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="songNameContainer">
-                                <div class="songName">
-                                    <p>想成为你<span>电影《英伦对决》推广曲</span></p>
-                                    <small><i class="titleIcon"></i>黄子韬 - 想成为你</small>
-                                </div>
-                                <div class="playIcon"><i class="titleIcon"></i></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="songNameContainer">
-                                <div class="songName">
-                                    <p>慢慢来 (女生版)</p>
-                                    <small><i class="titleIcon"></i>Dragon Pig / AY楊佬叁 - 慢慢来 (女生版)</small>
-                                </div>
-                                <div class="playIcon"><i class="titleIcon"></i></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="songNameContainer">
-                                <div class="songName">
-                                    <p>CANVAS</p>
-                                    <small>俊昊 - CANVAS</small>
+                <ol id="latestMusicList">
 
-                                </div>
-                                <div class="playIcon"><i class="titleIcon"></i></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="songNameContainer">
-                                <div class="songName">
-                                    <p>Disco Tits</p>
-                                    <small>Tove Lo - Disco Tits</small>
-                                </div>
-                                <div class="playIcon"><i class="titleIcon"></i></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="songNameContainer">
-                                <div class="songName">
-                                    <p>너와 나의 다른점</p>
-                                    <small>Kenta - 돌아온 복단지 OST Part 9</small>
-                                </div>
-                                <div class="playIcon"><i class="titleIcon"></i></div>
-                            </div>
-
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="songNameContainer">
-                                <div class="songName">
-                                    <p>樱花粉的浪漫</p>
-                                    <small><i class="titleIcon"></i>周二珂 - 樱花粉的浪漫</small>
-                                </div>
-                                <div class="playIcon"><i class="titleIcon"></i></div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="songNameContainer">
-                                <div class="songName">
-                                    <p>慢慢来 (男生版)</p>
-                                    <small>Dragon Pig / 谢帝 - 慢慢来 (男生版)</small>
-                                </div>
-                                <div class="playIcon"><i class="titleIcon"></i></div>
-                            </div>
-
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="songNameContainer">
-                                <div class="songName">
-                                    <p>爸爸去哪儿<span>真人秀节目《爸爸去哪儿 第五季》主题曲</span></p>
-                                    <small><i class="titleIcon"></i>陈小春 / 邓伦 / 杜江 / 刘畊宏 / 吴尊 / 小山竹 / NEINEI / 嗯哼 / 小小春 / 刘宇芙 / Max - 爸爸去哪儿 第五季
-                                    </small>
-                                </div>
-                                <div class="playIcon"><i class="titleIcon"></i></div>
-                            </div>
-
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <div class="songNameContainer">
-                                <div class="songName">
-                                    <p>黑夜女神</p>
-                                    <small>SNH48黄婷婷 - 黑夜女神</small>
-                                </div>
-                                <div class="playIcon"><i class="titleIcon"></i></div>
-                            </div>
-
-                        </a>
-                    </li>
                 </ol>
             </div>
             <div class="artContainer">
@@ -257,8 +142,72 @@
         <li class="search"></li>
     </ul>
 </section>
-<script src="./node_modules/jquery/dist/jquery.min.js"></script>
+<script src="./vendors/jquery.min.js"></script>
+<script src="./vendors/av-min.js"></script>
 <script>
+    var APP_ID = '1luhcRP3UEcL6HFn0yykbN2E-gzGzoHsz';
+    var APP_KEY = 'AVYfJvkkS0MhiiYe0pd9H8Wz';
+
+    AV.init({
+        appId: APP_ID,
+        appKey: APP_KEY
+    });
+    var query = new AV.Query('Song');
+    query.find().then(function (results) {
+        for(var i=0;i<10;i++){
+            var songInfo = results[i].attributes
+            var li =
+                `<li>
+                        <a href="#">
+                            <div class="songNameContainer">
+                                <div class="songName">
+                                    <p>${songInfo.name}<span>${songInfo.subname}</span></p>
+                                    <small><i class="titleIcon"></i>${songInfo.singer} - ${songInfo.album}</small>
+                                </div>
+                                <div class="playIcon"><i class="titleIcon"></i></div>
+                            </div>
+                        </a>
+                    </li>`
+            $('#latestMusicList').append(li)
+
+        }
+    }, function (error) {
+        alert('获取失败，请刷新重试')
+    });
+//    下面代码作用是向leancloud保存歌曲信息
+//    var SongObject = AV.Object.extend('Song');
+//    var songInfoArr = [{name: 'See You Again', subname: '《速度与激情7》致敬保罗沃克插曲', singer: 'Wiz Khalifa', album: 'Furious 7 (Original Motion Picture Soundtrack)', url: 'http://opdzp4hj6.bkt.clouddn.com/see%20you%20again.mp3'},
+//        {name: '山有木兮【女生版】（Cover 伦桑）', subname: '', singer: '墨默-f', album: '山有木兮', url: 'http://opdzp4hj6.bkt.clouddn.com/%E5%B1%B1%E6%9C%89%E6%9C%A8%E5%85%AE.mp3'},
+//        {name: '山有木兮-橙光游戏《人鱼传说之长生烛》主题曲', subname: '', singer: '伦桑 / 橙光音乐', album: '人鱼传说之长生烛·橙光OST', url: 'http://opdzp4hj6.bkt.clouddn.com/%E5%B1%B1%E6%9C%89%E6%9C%A8%E5%85%AE%E7%94%B7%E7%94%9F%E7%89%88.mp3'},
+//        {name: 'Dream It Possible', subname: '', singer: 'Delacey', album: 'Dream It Possible', url: 'http://opdzp4hj6.bkt.clouddn.com/dream%20it%20possible.mp3'},
+//        {name: 'Missing You', subname: '', singer: 'Bobby Tinsley', album: 'What About Bob', url: 'http://opdzp4hj6.bkt.clouddn.com/missing%20you.mp3'},
+//        {name: '为龙', subname: '', singer: '河图', album: '唱给你的歌', url: 'http://opdzp4hj6.bkt.clouddn.com/%E4%B8%BA%E9%BE%99.mp3'},
+//        {name: 'You Raise Me Up', subname: '', singer: 'Westlife', album: 'You Raise Me Up', url: 'http://opdzp4hj6.bkt.clouddn.com/You%20Raise%20Me%20Up.mp3'},
+//        {name: '50 Ways To Say Goodbye', subname: '', singer: 'Train', album: 'California 37', url: 'http://opdzp4hj6.bkt.clouddn.com/50%20Ways%20To%20Say%20Goodbye.mp3'},
+//        {name: 'Shape of You', subname: '', singer: 'Ed Sheeran', album: 'Shape Of You', url: 'http://opdzp4hj6.bkt.clouddn.com/Shape%20of%20You.mp3'},
+//        {name: '惊鸿一面', subname: '', singer: '许嵩 / 黄龄', album: '不如吃茶去', url: 'http://opdzp4hj6.bkt.clouddn.com/%E6%83%8A%E9%B8%BF%E4%B8%80%E9%9D%A2.mp3'},
+//        {name: '悟空', subname: '', singer: '贰婶', album: '不贰', url: 'http://opdzp4hj6.bkt.clouddn.com/%E6%82%9F%E7%A9%BA.mp3'},
+//        {name: 'Seasons In The Sun', subname: '', singer: 'Westlife', album: 'Westlife', url: 'http://opdzp4hj6.bkt.clouddn.com/Seasons%20In%20The%20Sun.mp3'},
+//        {name: 'Call Me Maybe', subname: '', singer: 'Carly Rae Jepsen', album: 'Call Me Maybe', url: 'http://opdzp4hj6.bkt.clouddn.com/Call%20Me%20Maybe.mp3'},
+//        {name: 'Whistle', subname: '', singer: 'Flo Rida', album: 'Whistle', url: 'http://opdzp4hj6.bkt.clouddn.com/Beautiful%20In%20White%20%28Demo%29.mp3'},
+//        {name: 'Cry On My Shoulder', subname: '', singer: 'Deutschland sucht den Superstar', album: 'United', url: 'http://opdzp4hj6.bkt.clouddn.com/Cry%20On%20My%20Shoulder.mp3'},
+//        {name: 'Everybody', subname: '', singer: 'Ingrid Michaelson', album: 'Everybody', url: ''},
+//        {name: 'Valder Fields', subname: '', singer: 'Tamas Wells', album: 'A Plea en Vendredi', url: 'http://opdzp4hj6.bkt.clouddn.com/Valder%20Fields.mp3'},
+//        {name: 'I\'m Yours', subname: '', singer: 'Jason Mraz', album: 'I\'m Yours', url: 'http://opdzp4hj6.bkt.clouddn.com/I%27m%20Yours.mp3'},
+//        {name: 'Fade', subname: '', singer: 'Alan Walker', album: 'Fade', url: 'http://opdzp4hj6.bkt.clouddn.com/Fade.mp3'},
+//        {name: 'Beautiful In White (Demo)', subname: '', singer: 'Shane Filan', album: 'Beautiful In White (Demo)', url: 'http://opdzp4hj6.bkt.clouddn.com/Beautiful%20In%20White%20%28Demo%29.mp3'}]
+//    var songArr = []
+//    for(var i=0;i<songInfoArr.length;i++){
+//        songArr[i]= new SongObject();
+//        songArr[i].set('name',songInfoArr[i].name)
+//        songArr[i].set('subname',songInfoArr[i].subname)
+//        songArr[i].set('singer',songInfoArr[i].singer)
+//        songArr[i].set('album',songInfoArr[i].album)
+//        songArr[i].set('url',songInfoArr[i].url)
+//        songArr.push(songArr[i])
+//    }
+//
+//    AV.Object.saveAll(songArr)
 
 </script>
 </body>

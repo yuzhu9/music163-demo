@@ -69,19 +69,19 @@ section.globalTabs .tabs {
     display: flex;
 }
 
-section.globalTabs .tabs > li {
+section.globalTabs .tabName{
     width: 33.333333%;
     text-align: center;
     font-size: 15px;
 }
 
-.tabs > li .tabName {
+.tabs .tabName>div {
     padding: 13px 5px 10px;
     display: inline-block;
     line-height: 1;
 }
 
-.tabs > li.active .tabName {
+.tabs > .tabName.active>div{
     color: #d43c33;
     border-bottom: 2px solid #d43c33;
     vertical-align: top;
@@ -121,10 +121,10 @@ section.contents::before {
 }
 
 .recommendLists li .listsCover {
+    /*1比1的盒子*/
     width: 100%;
     padding-top: 100%;
     position: relative;
-
 }
 
 .recommendLists .listsCover img {
@@ -263,7 +263,6 @@ section.contents::before {
     border-radius: 38px;
     line-height: 38px;
     margin: 10px 37px 5px;
-
 }
 .art .copyright {
     font-size: 12px;
