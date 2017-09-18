@@ -64,7 +64,24 @@ section.globalTabs {
     border-bottom: 1px solid #dddddd;
     background: #ffffff;
 }
-
+.recommendMusic {
+    display: none;
+}
+.recommendMusic.active {
+    display: block;
+}
+.hotsongs {
+    display: none;
+}
+.hotsongs.active {
+    display: block;
+}
+/*.search {*/
+    /*display: none;*/
+/*}*/
+.search.active {
+    display: block;
+}
 section.globalTabs .tabs {
     display: flex;
 }
@@ -267,6 +284,13 @@ section.contents::before {
 .art .copyright {
     font-size: 12px;
     color: #888888;
-
     transform: scale(0.75);
+}
+
+
+
+/*search*/
+.search .searchButton {
+    border: 1px solid yellow;
+    background-color: green;
 }

@@ -47,13 +47,13 @@
     </section>
     <section class="globalTabs">
         <ul class="tabs">
-            <li class="tabName active">
+            <li class="tabName">
                 <div>推荐音乐</div>
             </li>
             <li class="tabName">
                 <div>热歌榜</div>
             </li>
-            <li class="tabName">
+            <li class="tabName active">
                 <div>搜索</div>
             </li>
         </ul>
@@ -61,7 +61,7 @@
 </div>
 <section class="contents">
     <ul>
-        <li class="recommendMusic active">
+        <li class="recommendMusic">
             <div class="recommendLists">
                 <h2>推荐歌单</h2>
                 <ul>
@@ -138,13 +138,28 @@
             </div>
             </div>
         </li>
-        <li class="hotsongs"></li>
-        <li class="search"></li>
+        <li class="hotsongs">page2</li>
+        <li class="search active">
+            <div class="searchButton">
+            <input type="text">
+            </div>
+            <ul id="searchResult"></ul>
+        </li>
     </ul>
 </section>
 <script src="./vendors/jquery.min.js"></script>
 <script src="./vendors/av-min.js"></script>
 <script>
+//tab切换
+    $('.tabs').on('click','.tabName',function(e){
+        let $li = $(e.currentTarget)
+        let index = $li.index()
+        $li.addClass('active').siblings().removeClass('active')
+        $('.contents>ul>li').eq(index).addClass('active').siblings().removeClass('active')
+    })
+
+
+//从leancloud获取歌曲数据
     var APP_ID = '1luhcRP3UEcL6HFn0yykbN2E-gzGzoHsz';
     var APP_KEY = 'AVYfJvkkS0MhiiYe0pd9H8Wz';
 
@@ -155,10 +170,10 @@
     var query = new AV.Query('Song');
     query.find().then(function (results) {
         for(var i=0;i<10;i++){
-            var songInfo = results[i].attributes
-            var li =
+            let songInfo = results[i].attributes
+            let li =
                 `<li>
-                        <a href="#">
+                        <a href="${songInfo.url}">
                             <div class="songNameContainer">
                                 <div class="songName">
                                     <p>${songInfo.name}<span>${songInfo.subname}</span></p>
@@ -174,6 +189,61 @@
     }, function (error) {
         alert('获取失败，请刷新重试')
     });
+
+
+
+//搜索
+$('.search>input').on('input',function(e){
+    value = $(e.currentTarget).val().trim()
+
+    var nameQuery = new AV.Query('Song')
+    nameQuery.contains('name', value)
+    var singerQuery = new AV.Query('Song')
+    singerQuery.contains('singer',value)
+    var query = AV.Query.or(nameQuery,singerQuery)
+    query.find().then(function(results){
+        $('#searchResult').empty()
+        if(results.length ===0){
+            $('#searchResult').html('啊噢！您查找的歌曲暂时没有收录哟')
+        }else{
+            for(var i=0;i<results.length;i++){
+                let song = results[i].attributes
+                let li=`
+                <li data-id = ${song.id}>${song.name} - ${song.singer}</li>
+`
+                $('#searchResult').append(li)
+            }
+        }
+
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //    下面代码作用是向leancloud保存歌曲信息
 //    var SongObject = AV.Object.extend('Song');
 //    var songInfoArr = [{name: 'See You Again', subname: '《速度与激情7》致敬保罗沃克插曲', singer: 'Wiz Khalifa', album: 'Furious 7 (Original Motion Picture Soundtrack)', url: 'http://opdzp4hj6.bkt.clouddn.com/see%20you%20again.mp3'},
