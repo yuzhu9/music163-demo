@@ -270,6 +270,7 @@
     }, function (error) {
         alert('获取失败，请刷新重试')
     });
+//    渲染到热歌榜
     query.find().then(function (results) {
         for (var i = 0; i < 20; i++) {
             let songInfo = results[i].attributes
@@ -298,6 +299,7 @@
     }, function (error) {
         alert('获取失败，请刷新重试')
     });
+
 
     //搜索
     $('.search input').on('input', function (e) {

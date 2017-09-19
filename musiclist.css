@@ -1,0 +1,235 @@
+html,body {
+    height: 100%;
+
+}
+.topBarBannerContainer { /*最外层的盒子，不能直接放背景，因为使用滤镜处理模糊后所有的内容都会模糊*/
+    width: 100%;
+    padding: 30px 15px;
+    position: relative;
+    overflow: hidden; /*作为背景的子盒子放大1.5倍，因此需要溢出隐藏，否则会出现横向滚动条*/
+}
+.topBarBannerBg { /*绝对定位一个子盒子作为背景，使用滤镜高斯模糊处理*/
+    position: absolute;
+    background: url("http://opdzp4hj6.bkt.clouddn.com/image/demo/109951163019209688.jpeg") no-repeat center;
+    background-size: cover;
+    filter: blur(30px);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.5);
+    z-index: 1;
+}
+.topBarBanner { /*作为背景的盒子绝对定位后z-index值高于此盒子，因此对此盒子使用相对定位，z-index设为2才生效，不能使用绝对定位，因为绝对定位后无法撑开最外层的祖先盒子*/
+    position: relative;
+    z-index: 2;
+    display: flex;
+}
+.songListCover {
+    width: 114px;
+    height: 114px;
+    position: relative;
+
+}
+@media screen and (min-width: 375px) {
+    .songListCover {
+        width: 126px;
+        height: 126px;
+    }
+}
+@media screen and (min-width: 414px) {
+    .songListCover {
+        width: 145px;
+        height: 145px;
+    }
+}
+@media screen and (min-width: 768px) {
+    .songListCover {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+.songListCover>img {
+    width: 100%;
+    height: 100%;
+}
+.songListCover .songListIcon {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    text-align: center;
+    background-color: rgba(217,48,48,.8);
+    color: #ffffff;
+    border-top-right-radius: 17px;
+    border-bottom-right-radius: 17px;
+    font-size: 10px;
+    padding: 0 8px;
+    font-style: normal;
+}
+.songListCover .playAmount {
+    position: absolute;
+    top: 0;
+    right: 2px;
+    color: #ffffff;
+    font-size: 12px;
+    padding-left: 15px;
+    background: url("http://opdzp4hj6.bkt.clouddn.com/image/demo/headseticon.svg") no-repeat 0;
+    background-size: 10px 11px;
+}
+.songListTitle {
+    flex-grow: 1;
+    margin-left: 15px;
+    color: #ffffff;
+}
+.songListTitle .contributor {
+    font-size: 14px;
+    margin-top: 20px;
+}
+.songListTitle p:first-child {
+    padding: 10px 0;
+}
+.songListTitle .contributor>img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+.songListInfo {
+    color: #666;
+    margin: 10px 15px;
+    font-size: 14px;
+
+}
+.songListInfo .songListTag>span {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 20px;
+    border: 1px solid #eeeeee;
+    margin-right: 5px;
+    font-size: 12px;
+}
+.songListInfo .songListSummary>p{
+    padding-bottom: 5px;
+    margin-top: 10px;
+}
+
+.musicListsNameAvatar {
+    font-size: 17px;
+}
+.musicListsNameAvatar h3 {
+    background: #eeeff0;
+    font-size: 12px;
+    color: #666;
+    padding: 3px 0 3px 10px;
+}
+.musicLists a {
+    padding-left: 10px;
+    display: flex;
+}
+
+
+.musicLists .songNameContainer {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+.musicLists .songName {
+    /*这样设置是为了让宽度根据屏幕大小自适应*/
+    flex-grow: 1;
+    width: 0;
+}
+
+.musicLists .songName p,
+.musicLists .songName small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.musicLists .songName span {
+    color: #888;
+}
+.musicLists .songName small {
+    display: block;
+    color: #888;
+    font-size: 12px;
+}
+
+.musicLists .playIcon {
+    padding: 0 10px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+}
+.musicLists .titleIcon {
+    display: inline-block;
+    background-size: 166px 97px;
+    background-image: url(http://opdzp4hj6.bkt.clouddn.com/index_icon_2x.png);
+}
+.musicLists .playIcon > i {
+    width: 22px;
+    height: 22px;
+    background-position: -24px 0;
+}
+
+@media (-webkit-min-device-pixel-ratio: 3) {
+    .musicLists .icon  {
+        background-image: url(http://opdzp4hj6.bkt.clouddn.com/image/demo/index_icon_3x.png);
+    }
+}
+.musicLists li {
+    border-bottom: 1px solid #eeeeee;
+}
+.musicLists li .ranking {
+    color: #999;
+    margin-right: 8px;
+}
+.bottomPrompt {
+    font-size: 12px;
+    color: #cccccc;
+    display: flex;
+    padding: 30px 0;
+    align-items: center;
+    margin-bottom: 50px;
+}
+.bottomPrompt>span {
+    height: 0;
+    border-top: 1px dashed #eeeeee;
+    flex-grow: 1;
+}
+.bottomDownload {
+    width: 100%;
+    position: fixed;
+    bottom: 5px;
+    left: 0;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+.bottomDownload>a {
+    padding: 5px 39px;
+    font-size: 15px;
+    border-radius: 4px;
+}
+.bottomDownload a:first-child {
+    background-color: #ffffff;
+    color: #d43b32;
+    border: 1px solid #d43b32;
+    margin-right: 13px;
+}
+.bottomDownload a:last-child {
+    background-color: #d43b32;
+    color: #ffffff;
+    border: 1px solid #d43b32;
+}
+@media (min-width: 375px){
+    .bottomDownload>a {
+        padding: 8px 55px;
+        font-size: 20px;
+    }
+    }
+
