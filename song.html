@@ -21,9 +21,9 @@
                 <div class="needle"></div>
                 <div class="ring"></div>
                 <div class="light"></div>
-                <img alt="" class="songCover">
+                <div alt="" class="songCover"><img src="" alt=""></div>
                 <div class="iconWrapper">
-                    <svg class="iconPlay"><use xlink:href="#icon-play"></use></svg>
+                    <svg class="iconPlay active"><use xlink:href="#icon-play"></use></svg>
                     <svg class="iconPause"><use xlink:href="#icon-pause"></use></svg>
                 </div>
             </div>
@@ -58,13 +58,8 @@
         let {url, lyric, cover, bg} = song.attributes
         let audio = document.createElement('audio')
         audio.src = url
-        document.querySelector('.songCover').src = cover
-
+        $('.songCover>img').attr('src',cover)
         $('.songPageBg').css('background-image','url(' + bg + ')')
-        audio.oncanplay = function(){
-            $('.iconPlay').addClass('active')
-            $('.songContent .iconWrapper').addClass('active')
-        }
         audio.onended = function(){
             $('.iconPause').removeClass('active')
             $('.iconPlay').addClass('active')
