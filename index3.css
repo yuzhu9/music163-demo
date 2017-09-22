@@ -350,6 +350,9 @@ display: flex;
     margin-right: 8px;
     margin-bottom: 8px;
 }
+/*.hotSearch>li>a {*/
+    /*display: block;*/
+/*}*/
 .searchResult {
     margin: 0 8px;
 }
@@ -369,7 +372,7 @@ display: flex;
     height: 13px;
     background-image: url("http://opdzp4hj6.bkt.clouddn.com/image/demo/close.svg");
 }
-.searchResult .resultList>span {
+.searchResult .resultList>a {
     flex-grow: 1;
 }
 .searchResult .resultList.active {

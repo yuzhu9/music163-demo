@@ -214,14 +214,7 @@
             </div>
             <div class="hotSearchContainer">
                 <h3>热门搜索</h3>
-                <ul class="hotSearch">
-                <li>Fade</li>
-                <li>Everybody</li>
-                <li>Valder Fields</li>
-                <li>Call Me Maybe</li>
-                <li>Cry On My Shoulder</li>
-                <li>Whistle</li>
-            </ul>
+                <ul class="hotSearch" id="hotSearch"></ul>
             </div>
             <ul id="searchResult" class="searchResult"></ul>
         </li>
@@ -254,7 +247,7 @@
             let songInfo = results[i].attributes
             let li =
                 `<li>
-                        <a href="${songInfo.url}">
+                        <a href="./song.html?id=${results[i].id}">
                             <div class="songNameContainer">
                                 <div class="songName">
                                     <p>${songInfo.name}<span>${songInfo.subname}</span></p>
@@ -265,7 +258,6 @@
                         </a>
                     </li>`
             $('#latestMusicList').append(li)
-
         }
     }, function (error) {
         alert('获取失败，请刷新重试')
@@ -282,7 +274,7 @@
             }
             let li =
                 `<li>
-                        <a href="${songInfo.url}">
+                        <a href="./song.html?id=${results[i].id}">
                             <div class="songNameContainer">
                                 <div class="ranking">${indexString}</div>
                                 <div class="songName">
@@ -300,90 +292,110 @@
         alert('获取失败，请刷新重试')
     });
 
-
-    //搜索
-    $('.search input').on('input', function (e) {
-        var originalValue = $(e.currentTarget).val()
-        value = originalValue.trim()
-        if(originalValue === ''){
-            $('.search .emptyIcon').removeClass('active')
-        }else{
-            $('.search .emptyIcon').addClass('active')
-            $('.search .emptyIcon').on('click',function(){
-                $('.search input').val('')
-            })
-        }
-        var nameQuery = new AV.Query('Song')
-        nameQuery.contains('name', value)
-        var singerQuery = new AV.Query('Song')
-        singerQuery.contains('singer', value)
-        var query = AV.Query.or(nameQuery, singerQuery)
-        query.find().then(function (results) {
-            $('#searchResult').empty()
-            if (results.length === 0) {
-                $('#searchResult').html('啊噢 ~~~ 您查找的歌曲暂时没有收录哟')
-            } else  {
-                $('.hotSearch>li').on('click',function(e){
-                    var text = $(e.currentTarget).text()
-                    $('.search input').val(text)
-                })
-                for (var i = 0; i < results.length; i++) {
-                    let song = results[i].attributes
-                    let li = `
-                <li class="resultList" data-id = ${song.id}><i class="clockIcon"></i><span>${song.name}</span><i class="closeIcon"></i></li>
-`
-                    $('#searchResult').append(li)
-                }
-                $('.searchResult .resultList>span').on('click',function(e){
-                    var text = $(e.currentTarget).text()
-                    $('.search input').val(text)
-                })
-                $('.searchResult .closeIcon').on('click',function(e){
-                    $(e.currentTarget).parent().addClass('active')
-                })
-
+//    渲染到搜索页推荐的歌曲
+    query.find().then(function (results) {
+        for (var i = 0; i < 20; i++) {
+            let songInfo = results[i].attributes
+            if(songInfo.hot){
+                let li =
+                    `<li>
+                        <a href="./song.html?id=${results[i].id}">${songInfo.name}</a>
+                </li>`
+                $('#hotSearch').append(li)
             }
+        }
+    }, function (error) {
+        alert('获取失败，请刷新重试')
+    });
+    // 搜索
+    var timer = null
+    $('.search input').on('input', function (e) {
+        if(timer){
+            window.clearTimeout(timer)
+        }
+        timer = setTimeout(function(){
+            timer = null
+            var originalValue = $(e.currentTarget).val()
+            var value = originalValue.trim()
+            if(originalValue === ''){
+                $('.search .emptyIcon').removeClass('active')
+            }else{
+                $('.search .emptyIcon').addClass('active')
+                $('.search .emptyIcon').on('click',function(){
+                    $('.search input').val('')
+                })
+            }
+            var nameQuery = new AV.Query('Song')
+            nameQuery.contains('name', value)
+            var singerQuery = new AV.Query('Song')
+            singerQuery.contains('singer', value)
+            var query = AV.Query.or(nameQuery, singerQuery)
+            query.find().then(function (results) {
+                $('#searchResult').empty()
+                if (results.length === 0) {
+                    $('#searchResult').html('啊噢 ~~~ 您查找的歌曲暂时没有收录哟')
+                } else  {
+                    for (var i = 0; i < results.length; i++) {
+                        let song = results[i].attributes
+                        let li = `
+                <li class="resultList" data-id = ${results[i].id}>
+                    <i class="clockIcon"></i>
+                    <a href="./song.html?id=${results[i].id}"><span>${song.name} - ${song.singer}</span></a>
+                    <i class="closeIcon"></i>
+                </li>
+`
+                        $('#searchResult').append(li)
+                    }
 
-        })
+                    $('.searchResult .closeIcon').on('click',function(e){
+                        $(e.currentTarget).parent().addClass('active')
+                    })
+
+                }
+
+            })
+        },400)
+
     })
 
 
 
 
     //    下面代码作用是向leancloud保存歌曲信息
-    //    var SongObject = AV.Object.extend('Song');
-    //    var songInfoArr = [{name: 'See You Again', subname: '《速度与激情7》致敬保罗沃克插曲', singer: 'Wiz Khalifa', album: 'Furious 7 (Original Motion Picture Soundtrack)', url: 'http://opdzp4hj6.bkt.clouddn.com/see%20you%20again.mp3'},
-    //        {name: '山有木兮【女生版】（Cover 伦桑）', subname: '', singer: '墨默-f', album: '山有木兮', url: 'http://opdzp4hj6.bkt.clouddn.com/%E5%B1%B1%E6%9C%89%E6%9C%A8%E5%85%AE.mp3'},
-    //        {name: '山有木兮-橙光游戏《人鱼传说之长生烛》主题曲', subname: '', singer: '伦桑 / 橙光音乐', album: '人鱼传说之长生烛·橙光OST', url: 'http://opdzp4hj6.bkt.clouddn.com/%E5%B1%B1%E6%9C%89%E6%9C%A8%E5%85%AE%E7%94%B7%E7%94%9F%E7%89%88.mp3'},
-    //        {name: 'Dream It Possible', subname: '', singer: 'Delacey', album: 'Dream It Possible', url: 'http://opdzp4hj6.bkt.clouddn.com/dream%20it%20possible.mp3'},
-    //        {name: 'Missing You', subname: '', singer: 'Bobby Tinsley', album: 'What About Bob', url: 'http://opdzp4hj6.bkt.clouddn.com/missing%20you.mp3'},
-    //        {name: '为龙', subname: '', singer: '河图', album: '唱给你的歌', url: 'http://opdzp4hj6.bkt.clouddn.com/%E4%B8%BA%E9%BE%99.mp3'},
-    //        {name: 'You Raise Me Up', subname: '', singer: 'Westlife', album: 'You Raise Me Up', url: 'http://opdzp4hj6.bkt.clouddn.com/You%20Raise%20Me%20Up.mp3'},
-    //        {name: '50 Ways To Say Goodbye', subname: '', singer: 'Train', album: 'California 37', url: 'http://opdzp4hj6.bkt.clouddn.com/50%20Ways%20To%20Say%20Goodbye.mp3'},
-    //        {name: 'Shape of You', subname: '', singer: 'Ed Sheeran', album: 'Shape Of You', url: 'http://opdzp4hj6.bkt.clouddn.com/Shape%20of%20You.mp3'},
-    //        {name: '惊鸿一面', subname: '', singer: '许嵩 / 黄龄', album: '不如吃茶去', url: 'http://opdzp4hj6.bkt.clouddn.com/%E6%83%8A%E9%B8%BF%E4%B8%80%E9%9D%A2.mp3'},
-    //        {name: '悟空', subname: '', singer: '贰婶', album: '不贰', url: 'http://opdzp4hj6.bkt.clouddn.com/%E6%82%9F%E7%A9%BA.mp3'},
-    //        {name: 'Seasons In The Sun', subname: '', singer: 'Westlife', album: 'Westlife', url: 'http://opdzp4hj6.bkt.clouddn.com/Seasons%20In%20The%20Sun.mp3'},
-    //        {name: 'Call Me Maybe', subname: '', singer: 'Carly Rae Jepsen', album: 'Call Me Maybe', url: 'http://opdzp4hj6.bkt.clouddn.com/Call%20Me%20Maybe.mp3'},
-    //        {name: 'Whistle', subname: '', singer: 'Flo Rida', album: 'Whistle', url: 'http://opdzp4hj6.bkt.clouddn.com/Beautiful%20In%20White%20%28Demo%29.mp3'},
-    //        {name: 'Cry On My Shoulder', subname: '', singer: 'Deutschland sucht den Superstar', album: 'United', url: 'http://opdzp4hj6.bkt.clouddn.com/Cry%20On%20My%20Shoulder.mp3'},
-    //        {name: 'Everybody', subname: '', singer: 'Ingrid Michaelson', album: 'Everybody', url: ''},
-    //        {name: 'Valder Fields', subname: '', singer: 'Tamas Wells', album: 'A Plea en Vendredi', url: 'http://opdzp4hj6.bkt.clouddn.com/Valder%20Fields.mp3'},
-    //        {name: 'I\'m Yours', subname: '', singer: 'Jason Mraz', album: 'I\'m Yours', url: 'http://opdzp4hj6.bkt.clouddn.com/I%27m%20Yours.mp3'},
-    //        {name: 'Fade', subname: '', singer: 'Alan Walker', album: 'Fade', url: 'http://opdzp4hj6.bkt.clouddn.com/Fade.mp3'},
-    //        {name: 'Beautiful In White (Demo)', subname: '', singer: 'Shane Filan', album: 'Beautiful In White (Demo)', url: 'http://opdzp4hj6.bkt.clouddn.com/Beautiful%20In%20White%20%28Demo%29.mp3'}]
-    //    var songArr = []
-    //    for(var i=0;i<songInfoArr.length;i++){
-    //        songArr[i]= new SongObject();
-    //        songArr[i].set('name',songInfoArr[i].name)
-    //        songArr[i].set('subname',songInfoArr[i].subname)
-    //        songArr[i].set('singer',songInfoArr[i].singer)
-    //        songArr[i].set('album',songInfoArr[i].album)
-    //        songArr[i].set('url',songInfoArr[i].url)
-    //        songArr.push(songArr[i])
-    //    }
-    //
-    //    AV.Object.saveAll(songArr)
+//        var SongObject = AV.Object.extend('Song');
+//        var songInfoArr = [{name: 'See You Again', subname: '《速度与激情7》致敬保罗沃克插曲', singer: 'Wiz Khalifa', album: 'Furious 7 (Original Motion Picture Soundtrack)', hot: true, url: 'http://opdzp4hj6.bkt.clouddn.com/see%20you%20again.mp3'},
+//            {name: '山有木兮【女生版】（Cover 伦桑）', subname: '', singer: '墨默-f', album: '山有木兮', hot: true, url: 'http://opdzp4hj6.bkt.clouddn.com/%E5%B1%B1%E6%9C%89%E6%9C%A8%E5%85%AE.mp3'},
+//            {name: '山有木兮-橙光游戏《人鱼传说之长生烛》主题曲', subname: '', singer: '伦桑 / 橙光音乐', album: '人鱼传说之长生烛·橙光OST', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/%E5%B1%B1%E6%9C%89%E6%9C%A8%E5%85%AE%E7%94%B7%E7%94%9F%E7%89%88.mp3'},
+//            {name: 'Dream It Possible', subname: '', singer: 'Delacey', album: 'Dream It Possible', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/dream%20it%20possible.mp3'},
+//            {name: 'Missing You', subname: '', singer: 'Bobby Tinsley', album: 'What About Bob', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/missing%20you.mp3'},
+//            {name: '为龙', subname: '', singer: '河图', album: '唱给你的歌', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/%E4%B8%BA%E9%BE%99.mp3'},
+//            {name: 'You Raise Me Up', subname: '', singer: 'Westlife', album: 'You Raise Me Up', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/You%20Raise%20Me%20Up.mp3'},
+//            {name: '50 Ways To Say Goodbye', subname: '', singer: 'Train', album: 'California 37', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/50%20Ways%20To%20Say%20Goodbye.mp3'},
+//            {name: 'Shape of You', subname: '', singer: 'Ed Sheeran', album: 'Shape Of You', hot: true, url: 'http://opdzp4hj6.bkt.clouddn.com/Shape%20of%20You.mp3'},
+//            {name: '惊鸿一面', subname: '', singer: '许嵩 / 黄龄', album: '不如吃茶去', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/%E6%83%8A%E9%B8%BF%E4%B8%80%E9%9D%A2.mp3'},
+//            {name: '悟空', subname: '', singer: '贰婶', album: '不贰', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/%E6%82%9F%E7%A9%BA.mp3'},
+//            {name: 'Seasons In The Sun', subname: '', singer: 'Westlife', album: 'Westlife', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/Seasons%20In%20The%20Sun.mp3'},
+//            {name: 'Call Me Maybe', subname: '', singer: 'Carly Rae Jepsen', album: 'Call Me Maybe', hot: true, url: 'http://opdzp4hj6.bkt.clouddn.com/Call%20Me%20Maybe.mp3'},
+//            {name: 'Whistle', subname: '', singer: 'Flo Rida', album: 'Whistle', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/Beautiful%20In%20White%20%28Demo%29.mp3'},
+//            {name: 'Cry On My Shoulder', subname: '', singer: 'Deutschland sucht den Superstar', album: 'United', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/Cry%20On%20My%20Shoulder.mp3'},
+//            {name: 'Everybody', subname: '', singer: 'Ingrid Michaelson', album: 'Everybody', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/Everybody.mp3'},
+//            {name: 'Valder Fields', subname: '', singer: 'Tamas Wells', album: 'A Plea en Vendredi', hot: true, url: 'http://opdzp4hj6.bkt.clouddn.com/Valder%20Fields.mp3'},
+//            {name: 'I\'m Yours', subname: '', singer: 'Jason Mraz', album: 'I\'m Yours', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/I%27m%20Yours.mp3'},
+//            {name: 'Fade', subname: '', singer: 'Alan Walker', album: 'Fade', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/Fade.mp3'},
+//            {name: 'Beautiful In White (Demo)', subname: '', singer: 'Shane Filan', album: 'Beautiful In White (Demo)', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/Beautiful%20In%20White%20%28Demo%29.mp3'}]
+//        var songArr = []
+//        for(var i=0;i<songInfoArr.length;i++){
+//            songArr[i]= new SongObject();
+//            songArr[i].set('name',songInfoArr[i].name)
+//            songArr[i].set('subname',songInfoArr[i].subname)
+//            songArr[i].set('singer',songInfoArr[i].singer)
+//            songArr[i].set('album',songInfoArr[i].album)
+//            songArr[i].set('hot',songInfoArr[i].hot)
+//            songArr[i].set('url',songInfoArr[i].url)
+//            songArr.push(songArr[i])
+//        }
+//
+//        AV.Object.saveAll(songArr)
 
 </script>
 </body>

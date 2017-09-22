@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./song.css">
+    <title>网易云音乐</title>
+</head>
+<body>
+<div class="songPageContainer">
+<div class="songPage">
+    <div class="songPageBg">
+    </div>
+    <div class="songContent">
+        <section class="disc">
+            <div class="discturn">
+                <div class="needle"></div>
+                <div class="ring"></div>
+                <div class="light"></div>
+                <img alt="" class="songCover">
+                <div class="iconWrapper">
+                    <svg class="iconPlay"><use xlink:href="#icon-play"></use></svg>
+                    <svg class="iconPause"><use xlink:href="#icon-pause"></use></svg>
+                </div>
+            </div>
+        </section>
+        <section class="songDescription" id="songDescription">
+        </section>
+        <section class="bottomLink">
+            <a href="./download.html">打开</a>
+            <a href="./download.html">下载</a>
+        </section>
+    </div>
+</div>
+</div>
+<script src="//at.alicdn.com/t/font_422649_wqr94t4j29jxlxr.js"></script>
+<script src="./vendors/jquery.min.js"></script>
+<script src="./vendors/av-min.js"></script>
+<script src="./AV.js"></script>
+<script>
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    var id = getParameterByName('id')
+    var query = new AV.Query('Song');
+    query.get(id).then(function (song){
+        let {url, lyric, cover, bg} = song.attributes
+        let video = document.createElement('video')
+        video.src = url
+        document.querySelector('.songCover').src = cover
+
+        $('.songPageBg').css('background-image','url(' + bg + ')')
+        video.oncanplay = function(){
+            $('.iconPlay').addClass('active')
+        }
+        video.onended = function(){
+            $('.iconPause').removeClass('active')
+            $('.iconPlay').addClass('active')
+            $('.discturn').removeClass('active')
+            $('.needle').addClass('pause')
+        }
+        $('.discturn .iconPlay').on('click',function(){
+            video.play()
+            $('.iconPlay').removeClass('active')
+            $('.iconPause').addClass('active')
+            $('.discturn').addClass('active')
+            $('.needle').removeClass('pause')
+        })
+        $('.discturn .iconPause').on('click',function(){
+            video.pause()
+            $('.iconPause').removeClass('active')
+            $('.iconPlay').addClass('active')
+            $('.discturn').removeClass('active')
+            $('.needle').addClass('pause')
+        })
+
+        let array = lyric.split('\\n')
+        let regex = /^\[(.+)\](.*)$/
+        array = array.map(function(string,index){
+            let matches = string.match(regex)
+            if(matches){
+                return {time: matches[1], lyric: matches[2]}
+            }
+        })
+        let h3 = ` <h3 class="songName">${song.attributes.name} - <span>${song.attributes.singer}</span></h3>`
+        let div = `<div class="songLyricContainer"><div class="songLyric"></div></div>`
+        $('#songDescription').append(h3)
+        $('#songDescription').append(div)
+        let $div = $('.songLyric')
+        array.map(function(object){
+            if(!object){return}
+            let arr = object.time.split(':')
+            let times = (+arr[0])*60 + (+arr[1])
+            let $p = $('<p/>')
+            $p.attr('data-time',times).text(object.lyric)
+            $p.appendTo($div)
+        })
+        setInterval(function(){
+            let current = video.currentTime
+            let arrayP = document.querySelectorAll('.songLyric>p')
+            let topValue = 0
+            for(var i=0;i<arrayP.length;i++){
+                if(arrayP[i].getAttribute('data-time') <=current && arrayP[i+1].getAttribute('data-time') > current){
+                    $(arrayP[i]).addClass('active').siblings().removeClass('active')
+                    $('.songLyric').css('top',-i*30 + 30 + 'px')
+
+//                    break;
+                }
+            }
+        },50)
+
+    })
+</script>
+</body>
+</html>

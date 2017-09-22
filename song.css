@@ -1,0 +1,382 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    over-flow: hidden;
+}
+
+.songPage {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.songPageBg {
+    background-repeat: repeat-y;
+    background-color: transparent;
+    background-position: center 0;
+    background-size: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform: scale(1.5);
+    overflow: hidden;
+    z-index: -1;
+}
+
+.songPageBg:after {
+    content: " ";
+    background-color: rgba(0, 0, 0, .5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.songContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.songContent .disc {
+    padding-top: 63px;
+    width: 100%;
+}
+
+@media (min-width: 360px) {
+    .songContent .disc {
+        padding-top: 70px;
+    }
+}
+
+@media (min-width: 414px) {
+    .songContent .disc {
+        padding-top: 80px;
+    }
+}
+
+.songContent .discturn {
+    width: 248px;
+    height: 248px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+@media (min-width: 360px) {
+    .songContent .discturn {
+        width: 296px;
+        height: 296px;
+    }
+}
+
+@media (min-width: 414px) {
+    .songContent .discturn {
+        width: 342px;
+        height: 342px;
+    }
+}
+
+.songContent .needle {
+    width: 84px;
+    height: 122px;
+    background: transparent url("http://opdzp4hj6.bkt.clouddn.com/image/demo/needle.png") no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: -63px;
+    left: 107px;
+    z-index: 10;
+    transform-origin: 0 0;
+    transform: rotateZ(-20deg);
+}
+
+@media (min-width: 360px) {
+    .songContent .needle {
+        width: 96px;
+        height: 137px;
+        background-image: url("http://opdzp4hj6.bkt.clouddn.com/image/demo/needle-ip6.png");
+        top: -70px;
+        left: 133px;
+    }
+}
+
+@media (min-width: 414px) {
+    .songContent .needle {
+        width: 110px;
+        height: 157px;
+        background-image: url("http://opdzp4hj6.bkt.clouddn.com/image/demo/needle-plus.png");
+        top: -80px;
+        left: 150px;
+    }
+}
+
+.songContent .discturn .ring {
+    background: transparent url("http://opdzp4hj6.bkt.clouddn.com/image/demo/disc.png") no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+}
+
+@media (min-width: 360px) {
+    .songContent .ring {
+        background-image: url("http://opdzp4hj6.bkt.clouddn.com/image/demo/disc-ip6.png");
+    }
+}
+
+@media (min-width: 414px) {
+    .songContent .ring {
+        background-image: url("http://opdzp4hj6.bkt.clouddn.com/image/demo/disc-plus.png");
+    }
+}
+
+.songContent .discturn .light {
+    background: transparent url("http://opdzp4hj6.bkt.clouddn.com/image/demo/disc_light.png") no-repeat;
+    background-size: contain;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+
+}
+
+@media (min-width: 360px) {
+    .songContent .ring {
+        background-image: url("http://opdzp4hj6.bkt.clouddn.com/image/demo/disc_light-ip6.png");
+    }
+}
+
+@media (min-width: 414px) {
+    .songContent .ring {
+        background-image: url("http://opdzp4hj6.bkt.clouddn.com/image/demo/disc_light-plus.png");
+    }
+}
+
+.songContent .discturn .songCover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    transform: scale(0.6);
+}
+
+.songContent .discturn.active .light {
+    animation: cycle2 10s infinite linear both;
+}
+
+.songContent .discturn.active .songCover {
+    animation: cycle 10s infinite linear both;
+}
+
+.songContent .discturn.active .needle {
+    animation: cycle4 400ms linear forwards;
+}
+
+.songContent .discturn .needle.pause {
+    animation: cycle3 400ms linear forwards;
+}
+
+@keyframes cycle {
+    from {
+        transform: scale(0.6) rotateZ(0deg);
+    }
+    to {
+        transform: scale(0.6) rotateZ(360deg);
+    }
+}
+
+@keyframes cycle2 {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+@keyframes cycle3 {
+    from {
+        transform: rotateZ(0deg);
+    }
+    to {
+        transform: rotateZ(-20deg);
+    }
+}
+
+@keyframes cycle4 {
+    from {
+
+        transform: rotateZ(-20deg);
+    }
+    to {
+
+        transform: rotateZ(0deg);
+    }
+}
+
+.songContent .iconWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 3;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+@media (min-width: 360px) {
+    .iconWrapper {
+        width: 56px;
+        height: 56px;
+    }
+}
+
+@media (min-width: 414px) {
+    .iconWrapper {
+        width: 65px;
+        height: 65px;
+    }
+}
+
+.songContent .iconWrapper > svg {
+    fill: #ffffff;
+    width: 30px;
+}
+
+@media (min-width: 360px) {
+    .iconWrapper > svg {
+        width: 32px;
+    }
+}
+
+@media (min-width: 414px) {
+    .iconWrapper > svg {
+        width: 35px;
+    }
+}
+
+.songContent .discturn .iconPlay,
+.songContent .discturn .iconPause {
+    display: none;
+}
+
+.songContent .discturn .iconPlay.active {
+    display: block;
+}
+
+.songContent .discturn .iconPause.active {
+    display: block;
+}
+
+.songDescription {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.bottomLink {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    margin-bottom: 18px;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+.bottomLink > a {
+    padding: 7px 43px;
+    font-size: 15px;
+    border-radius: 4px;
+}
+
+.bottomLink a:first-child {
+    background-color: transparent;
+    color: #d43b32;
+    border: 1px solid #d43b32;
+    margin-right: 13px;
+}
+
+.bottomLink a:last-child {
+    background-color: #d43b32;
+    color: #ffffff;
+    border: 1px solid #d43b32;
+}
+
+@media (min-width: 375px) {
+    .bottomLink > a {
+        padding: 8px 55px;
+        font-size: 20px;
+    }
+}
+
+.songDescription {
+    display: flex;
+    flex-direction: column;
+    padding: 0 35px;
+    width: 100%;
+}
+
+.songDescription .songName {
+    font-size: 18px;
+    color: #ffffff;
+    margin-top: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: center;
+}
+
+.songDescription .songName > span {
+    color: #aeabac;
+    font-size: 14px;
+}
+
+.songDescription .songLyricContainer {
+    height: 90px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 20px;
+}
+
+.songDescription .songLyric {
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+}
+
+.songDescription .songLyric p {
+    width: 100%;
+    font-size: 14px;
+    color: #aeabac;
+    line-height: 30px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.songDescription .songLyric p.active {
+    color: #ffffff;
+}
