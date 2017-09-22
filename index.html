@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./reset.css">
-    <link rel="stylesheet" href="./index3.css">
+    <link rel="stylesheet" href="./index.css">
     <title>网易云音乐</title>
 </head>
 <body>
@@ -43,14 +43,14 @@
                 </g>
             </svg>
         </div>
-        <a href="#">下载APP</a>
+        <a href="./download.html">下载APP</a>
     </section>
     <section class="globalTabs">
         <ul class="tabs">
-            <li class="tabName">
+            <li class="tabName active">
                 <div>推荐音乐</div>
             </li>
-            <li class="tabName active">
+            <li class="tabName">
                 <div>热歌榜</div>
             </li>
             <li class="tabName">
@@ -61,12 +61,12 @@
 </div>
 <section class="contents">
     <ul>
-        <li class="recommendMusic">
+        <li class="recommendMusic active">
             <div class="recommendLists">
                 <h2>推荐歌单</h2>
                 <ul>
                     <li>
-                        <a href="#">
+                        <a href="./musiclist.html">
                             <div class="listsCover">
                                 <img src="http://opdzp4hj6.bkt.clouddn.com/image/demo/109951163023787692.jpeg" alt="">
                                 <span>172万</span>
@@ -76,7 +76,7 @@
                     </li>
                     <li>
 
-                        <a href="#">
+                        <a href="./musiclist.html">
                             <div class="listsCover">
                                 <img src="http://opdzp4hj6.bkt.clouddn.com/image/demo/109951163022926005.jpeg" alt="">
                                 <span>26.3万</span>
@@ -86,7 +86,7 @@
                     </li>
                     <li>
 
-                        <a href="#">
+                        <a href="./musiclist.html">
                             <div class="listsCover">
                                 <img src="http://opdzp4hj6.bkt.clouddn.com/image/demo/109951163017680528.jpeg" alt="">
                                 <span>70.5万</span>
@@ -96,7 +96,7 @@
                     </li>
                     <li>
 
-                        <a href="#">
+                        <a href="./musiclist.html">
                             <div class="listsCover">
                                 <img src="http://opdzp4hj6.bkt.clouddn.com/image/demo/109951163019209688.jpeg" alt="">
                                 <span>33.6万</span>
@@ -105,7 +105,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="./musiclist.html">
                             <div class="listsCover">
                                 <img src="http://opdzp4hj6.bkt.clouddn.com/image/demo19104014532971432.jpeg" alt="">
                                 <p>⚡️17年8月新热电音推送</p>
@@ -114,7 +114,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="./musiclist.html">
                             <div class="listsCover">
                                 <img src="http://opdzp4hj6.bkt.clouddn.com/109951163019589590.jpeg" alt="">
                                 <span>442.1万</span>
@@ -196,7 +196,7 @@
                 </div>
             </div>
         </li>
-        <li class="hotsongs active">
+        <li class="hotsongs">
             <div class="hotBannerContainer">
                 <div class="hotBanner">
                 <div class="bannerImg"></div>
@@ -361,41 +361,7 @@
 
 
 
-    //    下面代码作用是向leancloud保存歌曲信息
-//        var SongObject = AV.Object.extend('Song');
-//        var songInfoArr = [{name: 'See You Again', subname: '《速度与激情7》致敬保罗沃克插曲', singer: 'Wiz Khalifa', album: 'Furious 7 (Original Motion Picture Soundtrack)', hot: true, url: 'http://opdzp4hj6.bkt.clouddn.com/see%20you%20again.mp3'},
-//            {name: '山有木兮【女生版】（Cover 伦桑）', subname: '', singer: '墨默-f', album: '山有木兮', hot: true, url: 'http://opdzp4hj6.bkt.clouddn.com/%E5%B1%B1%E6%9C%89%E6%9C%A8%E5%85%AE.mp3'},
-//            {name: '山有木兮-橙光游戏《人鱼传说之长生烛》主题曲', subname: '', singer: '伦桑 / 橙光音乐', album: '人鱼传说之长生烛·橙光OST', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/%E5%B1%B1%E6%9C%89%E6%9C%A8%E5%85%AE%E7%94%B7%E7%94%9F%E7%89%88.mp3'},
-//            {name: 'Dream It Possible', subname: '', singer: 'Delacey', album: 'Dream It Possible', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/dream%20it%20possible.mp3'},
-//            {name: 'Missing You', subname: '', singer: 'Bobby Tinsley', album: 'What About Bob', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/missing%20you.mp3'},
-//            {name: '为龙', subname: '', singer: '河图', album: '唱给你的歌', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/%E4%B8%BA%E9%BE%99.mp3'},
-//            {name: 'You Raise Me Up', subname: '', singer: 'Westlife', album: 'You Raise Me Up', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/You%20Raise%20Me%20Up.mp3'},
-//            {name: '50 Ways To Say Goodbye', subname: '', singer: 'Train', album: 'California 37', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/50%20Ways%20To%20Say%20Goodbye.mp3'},
-//            {name: 'Shape of You', subname: '', singer: 'Ed Sheeran', album: 'Shape Of You', hot: true, url: 'http://opdzp4hj6.bkt.clouddn.com/Shape%20of%20You.mp3'},
-//            {name: '惊鸿一面', subname: '', singer: '许嵩 / 黄龄', album: '不如吃茶去', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/%E6%83%8A%E9%B8%BF%E4%B8%80%E9%9D%A2.mp3'},
-//            {name: '悟空', subname: '', singer: '贰婶', album: '不贰', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/%E6%82%9F%E7%A9%BA.mp3'},
-//            {name: 'Seasons In The Sun', subname: '', singer: 'Westlife', album: 'Westlife', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/Seasons%20In%20The%20Sun.mp3'},
-//            {name: 'Call Me Maybe', subname: '', singer: 'Carly Rae Jepsen', album: 'Call Me Maybe', hot: true, url: 'http://opdzp4hj6.bkt.clouddn.com/Call%20Me%20Maybe.mp3'},
-//            {name: 'Whistle', subname: '', singer: 'Flo Rida', album: 'Whistle', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/Beautiful%20In%20White%20%28Demo%29.mp3'},
-//            {name: 'Cry On My Shoulder', subname: '', singer: 'Deutschland sucht den Superstar', album: 'United', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/Cry%20On%20My%20Shoulder.mp3'},
-//            {name: 'Everybody', subname: '', singer: 'Ingrid Michaelson', album: 'Everybody', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/Everybody.mp3'},
-//            {name: 'Valder Fields', subname: '', singer: 'Tamas Wells', album: 'A Plea en Vendredi', hot: true, url: 'http://opdzp4hj6.bkt.clouddn.com/Valder%20Fields.mp3'},
-//            {name: 'I\'m Yours', subname: '', singer: 'Jason Mraz', album: 'I\'m Yours', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/I%27m%20Yours.mp3'},
-//            {name: 'Fade', subname: '', singer: 'Alan Walker', album: 'Fade', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/Fade.mp3'},
-//            {name: 'Beautiful In White (Demo)', subname: '', singer: 'Shane Filan', album: 'Beautiful In White (Demo)', hot: false, url: 'http://opdzp4hj6.bkt.clouddn.com/Beautiful%20In%20White%20%28Demo%29.mp3'}]
-//        var songArr = []
-//        for(var i=0;i<songInfoArr.length;i++){
-//            songArr[i]= new SongObject();
-//            songArr[i].set('name',songInfoArr[i].name)
-//            songArr[i].set('subname',songInfoArr[i].subname)
-//            songArr[i].set('singer',songInfoArr[i].singer)
-//            songArr[i].set('album',songInfoArr[i].album)
-//            songArr[i].set('hot',songInfoArr[i].hot)
-//            songArr[i].set('url',songInfoArr[i].url)
-//            songArr.push(songArr[i])
-//        }
-//
-//        AV.Object.saveAll(songArr)
+
 
 </script>
 </body>

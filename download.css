@@ -50,4 +50,5 @@ html,body,.container {
     color: #ffffff;
     padding: 7px 46px;
     margin-top: 40px;
+    white-space:nowrap;
 }
