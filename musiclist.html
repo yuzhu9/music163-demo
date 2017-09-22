@@ -5,8 +5,10 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./reset.css">
-    <link rel="stylesheet" href="./musiclist.css">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <link rel="stylesheet" href="./src/reset.css">
+    <link rel="stylesheet" href="./src/musiclist.css">
     <title>网易云音乐-示例歌单</title>
 </head>
 <body>
@@ -48,16 +50,8 @@
 </div>
 <script src="./vendors/jquery.min.js"></script>
 <script src="./vendors/av-min.js"></script>
+<script src="./src/AV.js"></script>
 <script>
-    //从leancloud获取歌曲数据
-    var APP_ID = '1luhcRP3UEcL6HFn0yykbN2E-gzGzoHsz';
-    var APP_KEY = 'AVYfJvkkS0MhiiYe0pd9H8Wz';
-
-    AV.init({
-        appId: APP_ID,
-        appKey: APP_KEY
-    });
-    var query = new AV.Query('Song');
     //      渲染到歌单列表
     query.find().then(function (results) {
         for (var i = 0; i < 20; i++) {

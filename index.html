@@ -5,12 +5,16 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./reset.css">
-    <link rel="stylesheet" href="./index.css">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <link rel="stylesheet" href="./src/reset.css">
+    <link rel="stylesheet" href="./src/index.css">
     <title>网易云音乐</title>
 </head>
 <body>
+<!--顶部-->
 <div class="top">
+    <!--顶部下载栏-->
     <section class="topbar">
         <div class="logo">
             <svg class="topsvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 284 50">
@@ -45,6 +49,7 @@
         </div>
         <a href="./download.html">下载APP</a>
     </section>
+    <!--首页tab栏-->
     <section class="globalTabs">
         <ul class="tabs">
             <li class="tabName active">
@@ -59,8 +64,10 @@
         </ul>
     </section>
 </div>
+<!--首页内容区-->
 <section class="contents">
     <ul>
+        <!--推荐歌单-->
         <li class="recommendMusic active">
             <div class="recommendLists">
                 <h2>推荐歌单</h2>
@@ -68,7 +75,8 @@
                     <li>
                         <a href="./musiclist.html">
                             <div class="listsCover">
-                                <img src="http://opdzp4hj6.bkt.clouddn.com/1_%E7%9C%8B%E5%9B%BE%E7%8E%8B.web.jpg" alt="">
+                                <img src="http://opdzp4hj6.bkt.clouddn.com/1_%E7%9C%8B%E5%9B%BE%E7%8E%8B.web.jpg"
+                                     alt="">
                                 <span>172万</span>
                             </div>
                             <p>长版｜听觉盛宴，不必喊停。</p>
@@ -124,6 +132,7 @@
                     </li>
                 </ul>
             </div>
+            <!--最新音乐-->
             <div class="latestMusic">
                 <h2>最新音乐</h2>
                 <ol id="latestMusicList">
@@ -196,16 +205,18 @@
                 </div>
             </div>
         </li>
+        <!--热歌榜-->
         <li class="hotsongs">
             <div class="hotBannerContainer">
                 <div class="hotBanner">
-                <div class="bannerImg"></div>
-                <p class="update">更新日期：09月14日</p>
+                    <div class="bannerImg"></div>
+                    <p class="update">更新日期：09月14日</p>
                 </div>
             </div>
             <ol class="hotsongsList" id="hotsongsList"></ol>
             <a class="linkDownload" href="#"><span>查看完整榜单</span><i class="arrowIcon"></i></a>
         </li>
+        <!--搜索-->
         <li class="search">
             <div class="searchButton">
                 <i class="searchIcon"></i>
@@ -222,6 +233,7 @@
 </section>
 <script src="./vendors/jquery.min.js"></script>
 <script src="./vendors/av-min.js"></script>
+<script src="./src/AV.js"></script>
 <script>
     //tab切换
     $('.tabs').on('click', '.tabName', function (e) {
@@ -232,16 +244,7 @@
     })
 
 
-    //从leancloud获取歌曲数据
-    var APP_ID = '1luhcRP3UEcL6HFn0yykbN2E-gzGzoHsz';
-    var APP_KEY = 'AVYfJvkkS0MhiiYe0pd9H8Wz';
-
-    AV.init({
-        appId: APP_ID,
-        appKey: APP_KEY
-    });
-    var query = new AV.Query('Song');
-//    渲染到首页最新音乐
+    //    渲染到首页最新音乐
     query.find().then(function (results) {
         for (var i = 0; i < 10; i++) {
             let songInfo = results[i].attributes
@@ -262,15 +265,15 @@
     }, function (error) {
         alert('获取失败，请刷新重试')
     });
-//    渲染到热歌榜
+    //    渲染到热歌榜
     query.find().then(function (results) {
         for (var i = 0; i < 20; i++) {
             let songInfo = results[i].attributes
             let indexString
-            if(i<9){
-                indexString = '0'+(i+1)
-            }else{
-                indexString = i+1
+            if (i < 9) {
+                indexString = '0' + (i + 1)
+            } else {
+                indexString = i + 1
             }
             let li =
                 `<li>
@@ -292,11 +295,11 @@
         alert('获取失败，请刷新重试')
     });
 
-//    渲染到搜索页推荐的歌曲
+    //    渲染到搜索页推荐的歌曲
     query.find().then(function (results) {
         for (var i = 0; i < 20; i++) {
             let songInfo = results[i].attributes
-            if(songInfo.hot){
+            if (songInfo.hot) {
                 let li =
                     `<li>
                         <a href="./song.html?id=${results[i].id}">${songInfo.name}</a>
@@ -310,18 +313,18 @@
     // 搜索
     var timer = null
     $('.search input').on('input', function (e) {
-        if(timer){
+        if (timer) {
             window.clearTimeout(timer)
         }
-        timer = setTimeout(function(){
+        timer = setTimeout(function () {
             timer = null
             var originalValue = $(e.currentTarget).val()
             var value = originalValue.trim()
-            if(originalValue === ''){
+            if (originalValue === '') {
                 $('.search .emptyIcon').removeClass('active')
-            }else{
+            } else {
                 $('.search .emptyIcon').addClass('active')
-                $('.search .emptyIcon').on('click',function(){
+                $('.search .emptyIcon').on('click', function () {
                     $('.search input').val('')
                 })
             }
@@ -334,7 +337,7 @@
                 $('#searchResult').empty()
                 if (results.length === 0) {
                     $('#searchResult').html('啊噢 ~~~ 您查找的歌曲暂时没有收录哟')
-                } else  {
+                } else {
                     for (var i = 0; i < results.length; i++) {
                         let song = results[i].attributes
                         let li = `
@@ -347,20 +350,16 @@
                         $('#searchResult').append(li)
                     }
 
-                    $('.searchResult .closeIcon').on('click',function(e){
+                    $('.searchResult .closeIcon').on('click', function (e) {
                         $(e.currentTarget).parent().addClass('active')
                     })
 
                 }
 
             })
-        },400)
+        }, 400)
 
     })
-
-
-
-
 
 
 </script>
