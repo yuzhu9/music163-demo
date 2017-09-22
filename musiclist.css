@@ -10,7 +10,7 @@ html,body {
 }
 .topBarBannerBg { /*绝对定位一个子盒子作为背景，使用滤镜高斯模糊处理*/
     position: absolute;
-    background: url("http://opdzp4hj6.bkt.clouddn.com/image/demo/109951163019209688.jpeg") no-repeat center;
+    background: url("http://opdzp4hj6.bkt.clouddn.com/images/demo/list04.jpeg") no-repeat center;
     background-size: cover;
     filter: blur(30px);
     left: 0;

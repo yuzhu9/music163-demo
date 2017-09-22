@@ -37,7 +37,6 @@
     </div>
 </div>
 </div>
-<script src="//at.alicdn.com/t/font_422649_wqr94t4j29jxlxr.js"></script>
 <script src="./vendors/jquery.min.js"></script>
 <script src="./vendors/av-min.js"></script>
 <script src="./AV.js"></script>
@@ -107,19 +106,34 @@
             $p.attr('data-time',times).text(object.lyric)
             $p.appendTo($div)
         })
-        setInterval(function(){
+//        setInterval(function(){
+//            let current = video.currentTime
+//            let arrayP = document.querySelectorAll('.songLyric>p')
+//
+//            for(var i=0;i<arrayP.length;i++){
+//                if(arrayP[i].getAttribute('data-time') <=current && arrayP[i+1].getAttribute('data-time') > current){
+//                    $(arrayP[i]).addClass('active').siblings().removeClass('active')
+//
+//                    $('.songLyric').css('top',-i*30 + 30 + 'px')
+//
+////                    break;
+//                }
+//            }
+//        },500)
+        video.ontimeupdate = function(){
             let current = video.currentTime
             let arrayP = document.querySelectorAll('.songLyric>p')
-            let topValue = 0
+
             for(var i=0;i<arrayP.length;i++){
                 if(arrayP[i].getAttribute('data-time') <=current && arrayP[i+1].getAttribute('data-time') > current){
                     $(arrayP[i]).addClass('active').siblings().removeClass('active')
+
                     $('.songLyric').css('top',-i*30 + 30 + 'px')
 
 //                    break;
                 }
             }
-        },50)
+        }
 
     })
 </script>
