@@ -23,7 +23,7 @@
                 <div class="needle"></div>
                 <div class="ring"></div>
                 <div class="light"></div>
-                <div alt="" class="songCover"><img src="" alt=""></div>
+                <div class="songCover"><img src="#" alt=""></div>
                 <div class="iconWrapper">
                     <svg class="iconPlay active"><use xlink:href="#icon-play"></use></svg>
                     <svg class="iconPause"><use xlink:href="#icon-pause"></use></svg>
@@ -91,7 +91,7 @@
                 return {time: matches[1], lyric: matches[2]}
             }
         })
-        let h3 = ` <h3 class="songName">${song.attributes.name} - <span>${song.attributes.singer}</span></h3>`
+        let h3 = ` <h3 class="songName">${song.attributes.name}<span> - ${song.attributes.singer}</span></h3>`
         let div = `<div class="songLyricContainer"><div class="songLyric"></div></div>`
         $('#songDescription').append(h3)
         $('#songDescription').append(div)
@@ -109,11 +109,10 @@
             let arrayP = document.querySelectorAll('.songLyric>p')
             for(var i=0;i<arrayP.length;i++){
                 if(i === arrayP.length -1){
-                    $(arrayP[i]).addClass('active').siblings().removeClass('active')
+                    $(arrayP[i]).addClass('active')
                 }else if(arrayP[i].getAttribute('data-time') <=current && arrayP[i+1].getAttribute('data-time') > current){
                     $(arrayP[i]).addClass('active').siblings().removeClass('active')
                     $('.songLyric').css('top', -i*30 + 60 + 'px')
-//                    break;
                 }
             }
         }
